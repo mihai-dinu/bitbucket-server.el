@@ -14,7 +14,7 @@ git server:
 When running a command for the first time, you will be prompted to add the
 Bitbucket Server URL (e.g. https://mybitbucket.com). This is stored in the
 `bitbucket-server-url` variable, but it will be cleared once you exit Emacs. To
-avaid being prompted every time, set the variable in your `init.el` file.
+avoid being prompted every time, set the variable in your `init.el` file.
 
 ```emacs-lisp
 (setq bitbucket-server-url "https://mybitbucket.com")
