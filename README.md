@@ -34,13 +34,19 @@ More functionality to come...
 ### Doom Emacs
 
 1. Download the `bitbucket-server.el` file to `~/.doom.d/lisp`
-   `wget https://raw.githubusercontent.com/mihai-dinu/bitbucket-server.el/master/bitbucket-server.el -O ~/.doom.d/lisp/bitbucket-server.el`
+
+   ```sh
+   wget https://raw.githubusercontent.com/mihai-dinu/bitbucket-server.el/master/bitbucket-server.el -O ~/.doom.d/lisp/bitbucket-server.el
+   ```
 2. Add `(load! "lisp/bitbucket-server")` to `~/.doom.d/config.el`
 
 ### Vanilla Emacs
 
 1. Download the `bitbucket-server.el` file to `~/.emacs.d/lisp`
-   `wget https://raw.githubusercontent.com/mihai-dinu/bitbucket-server.el/master/bitbucket-server.el -O ~/.emacs.d/lisp/bitbucket-server.el`
+
+   ```sh
+   wget https://raw.githubusercontent.com/mihai-dinu/bitbucket-server.el/master/bitbucket-server.el -O ~/.emacs.d/lisp/bitbucket-server.el
+   ```
 2. Add `(load "lisp/bitbucket-server")` to your Emacs init file
 
 Tested with Emacs 26.3 and Bitbucket Server 5.8.0
