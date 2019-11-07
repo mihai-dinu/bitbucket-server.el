@@ -10,7 +10,11 @@ git server:
 - `M-x bitbucket-server-open-file-at-point` will open a browser webpage to your
   Bitbucket Server pointing to the current buffer **and** the current line
   number
-  
+- `M-x bitbucket-server-copy-file-url` will add the Bitbucket Server current
+  buffer URL to the kill-ring (clipboard).
+- `M-x bitbucket-server-copy-file-url-with-line-number` will add the Bitbucket
+  Server current buffer URL, with line number, to the kill-ring (clipboard).
+
 **Caution**: This plugin does not work with Bitbucket Cloud (https://bitbucket.org)
 
 When running a command for the first time, you will be prompted to add the
@@ -38,6 +42,7 @@ More functionality to come...
    ```sh
    wget https://raw.githubusercontent.com/mihai-dinu/bitbucket-server.el/master/bitbucket-server.el -O ~/.doom.d/lisp/bitbucket-server.el
    ```
+
 2. Add `(load! "lisp/bitbucket-server")` to `~/.doom.d/config.el`
 
 ### Vanilla Emacs
@@ -47,6 +52,7 @@ More functionality to come...
    ```sh
    wget https://raw.githubusercontent.com/mihai-dinu/bitbucket-server.el/master/bitbucket-server.el -O ~/.emacs.d/lisp/bitbucket-server.el
    ```
+
 2. Add `(load "lisp/bitbucket-server")` to your Emacs init file
 
 Tested with Emacs 26.3 and Bitbucket Server 5.8.0
