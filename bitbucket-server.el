@@ -35,10 +35,10 @@
   "The Bitbucket server url to use for the bitbucket-server package.
 The format is: `http(s)://<bitbucket-server-url>/'")
 
-(defvar bitbucket-server-username nil
+(defvar bitbucket-server-username "mihdin"
   "Your Bitbucket Server username.")
 
-(defvar bitbucket-server-password nil
+(defvar bitbucket-server-password "zh+CEwqDrI4="
   "Your Bitbucket Server password.")
 
 (defun bitbucket-server--ensure-url-is-set ()
@@ -142,7 +142,7 @@ Prompts the user to set the Bitbucket server URL if not already set."
   (interactive
    (list (read-from-minibuffer "Bitbucket PR target branch: " "master")))
   (bitbucket-server--ensure-url-is-set)
-  (let ((bitbucket-server-pr-url (bitbucket-server--build-url (format "%s/browse/%s" (bitbucket-server--project-and-repo-path) "compare/commits")
+  (let ((bitbucket-server-pr-url (bitbucket-server--build-url (format "%s/%s" (bitbucket-server--project-and-repo-path) "compare/commits")
                                                            (list (cons 'sourceBranch (bitbucket-server--refs-heads (magit-get-current-branch)))
                                                                  (cons 'targetBranch (bitbucket-server--refs-heads target-branch))))))
     (browse-url bitbucket-server-pr-url)))
@@ -168,11 +168,17 @@ Will open the file at the current line number."
   (interactive)
   (kill-new (bitbucket-server--file-url (format "#%s" (line-number-at-pos)))))
 
+(defun bitbucket-server--parse-pr-data (pr-data)
+  "WIP: TBD DATA."
+  (cl-loop for pr across pr-data
+           do (cl-delete-if-not (lambda (key-value) (member (car key-value) '(id title state links))) pr))
+  (message "%S" pr-data))
+
 (defun bitbucket-server--own-pull-requests ()
   "WIP: Get the Bitbucket Server pull request data for the current user."
-  (let ((bitbucket-server-api (bitbucket-server--build-url "rest/api/1.0/dashboard/pull-requests")))
+  (let ((bitbucket-server-api-url (bitbucket-server--build-url "rest/api/1.0/dashboard/pull-requests")))
     (request
-     bitbucket-server-api
+     bitbucket-server-api-url
      :headers (list (cons "Content-Type" "application/json")
                     (cons "Authorization" (format "Basic %s"
                                                   (base64-encode-string (format "%s:%s"
@@ -183,7 +189,7 @@ Will open the file at the current line number."
                (lambda (&key data &key error-thrown &allow-other-keys)
                  (if error-thrown
                      (message "Failed to fetch pull requests data: %s" error-thrown)
-                   (message "Done %s" (assoc 'values data))))))))
+                   (bitbucket-server--parse-pr-data (cdr (assoc 'values data)))))))))
 
 (provide 'bitbucket-server)
 ;;; bitbucket-server.el ends here
